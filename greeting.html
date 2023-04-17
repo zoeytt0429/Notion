@@ -17,7 +17,7 @@
         }
 
         .widget {
-            background-color: #333;
+            background-color: #FEE7E1;
             padding: 5px 5px ;
             color: #8797a6;
             display: flex;
@@ -26,29 +26,29 @@
             flex-direction: column;
             max-width: 95%;
             margin: auto;
-            border: 3px solid #acbdcd;
+            border: 3px solid #9C858E;
             border-radius: 5px;
-            box-shadow: 2px 2px 1px 0px #acbdcd;
+            box-shadow: 2px 2px 1px 0px #9C858E;
 
         }
 
            
         .greet{
             font-size: 3em;
-            color: #8797a6;
+            color: #BE95A2;
         }
 
         .date {
       
             font-family: monospace;
             font-size: 2em;
-            color: #eccfd7;
+            color: #5A4E58;
         }
 
         .clock {
             font-family: monospace;
             font-size: 2em;
-            color: #eccfd7;
+            color: #5A4E58;
         }
 
         .time {
@@ -100,13 +100,19 @@
 
 function dispalyGreetings(today){
         hrs = today.getHours();
-        name="刘美美"
-        if (hrs < 12)
-            greet = '早安鸟  '+name;
-        else if (hrs >= 12 && hrs <= 17)
-            greet = '午安饭团 '+name;
-        else if (hrs >= 17 && hrs <= 24)
-            greet = '晚安蛤蟆皮  '+name;
+        name="XXX"
+        if (hrs < 4)
+            greet = "It's very late, " + name + ". You should be sleeping!";
+        else if (< 8)
+            greet =  "Good morning, " + name + "! Rise and shine!";
+       else if (< 12)
+            greet =  "Good morning, " + name + "! Let's start working!";
+       else if (<18)
+            greet =  "Good afternoon, " + name + "! Keep up the good work!";
+       else if (< 22)
+            greet =   "Good evening, " + name + "! How was your day?";
+        else
+            greet = "It's getting late, " + name + ". You should rest soon!";
         document.getElementById('greet').innerHTML = greet;
 
     }
