@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,41 +10,44 @@
 
         body{
             font-variant-caps: all-petite-caps;
-            background-color: navy;
-            color: white;
+            
 
 
         }
 
         .widget {
+            background-color: #FEE7E1;
             padding: 5px 5px ;
-            color: #000000;
+            color: #8797a6;
             display: flex;
             justify-content:center;
             align-items:center;
             flex-direction: column;
             max-width: 95%;
             margin: auto;
-            border: 3px solid #000000;
+            border: 3px solid #9C858E;
             border-radius: 5px;
-            box-shadow: 2px 2px 1px 0px #000000;
+            box-shadow: 2px 2px 1px 0px #9C858E;
 
         }
 
            
         .greet{
             font-size: 3em;
+            color: #BE95A2;
         }
 
         .date {
       
             font-family: monospace;
             font-size: 2em;
+            color: #5A4E58;
         }
 
         .clock {
             font-family: monospace;
             font-size: 2em;
+            color: #5A4E58;
         }
 
         .time {
@@ -97,13 +99,19 @@
 
 function dispalyGreetings(today){
         hrs = today.getHours();
-        name="刘美美"
-        if (hrs < 12)
-            greet = '早安鸟  '+name;
-        else if (hrs >= 12 && hrs <= 17)
-            greet = '午安饭团 '+name;
-        else if (hrs >= 17 && hrs <= 24)
-            greet = '晚安蛤蟆皮  '+name;
+        name="冯大头"
+        if (hrs < 4)
+            greet =  name + "夜深了，建议早点休息";
+        else if (hrs< 8)
+            greet =  name + "早上好，新的一天开始了";
+       else if (hrs< 12)
+            greet =   name + "上午好，工作要努力哦。";
+       else if (hrs<18)
+            greet =  name + "下午好，工作要继续加油。";
+       else if (hrs< 22)
+            greet =   name + "晚上好，可以放松一下了。";
+        else
+            greet = name + "夜深了，注意休息哦。";
         document.getElementById('greet').innerHTML = greet;
 
     }
