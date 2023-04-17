@@ -11,6 +11,8 @@
 
         body{
             font-variant-caps: all-petite-caps;
+            background-color: navy;
+            color: white;
 
 
         }
@@ -95,13 +97,13 @@
 
 function dispalyGreetings(today){
         hrs = today.getHours();
-        name="田嘉灵"
+        name="刘美美"
         if (hrs < 12)
-            greet = 'Good Morning  '+name;
+            greet = '早安鸟  '+name;
         else if (hrs >= 12 && hrs <= 17)
-            greet = 'Good Afternoon '+name;
+            greet = '午安饭团 '+name;
         else if (hrs >= 17 && hrs <= 24)
-            greet = 'Good Evening  '+name;
+            greet = '晚安蛤蟆皮  '+name;
         document.getElementById('greet').innerHTML = greet;
 
     }
