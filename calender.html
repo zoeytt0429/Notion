@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>2023年日历</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<style>
+		table {
+			border-collapse: collapse;
+			margin: auto;
+		}
+		td {
+			width: 100px;
+			height: 100px;
+			text-align: center;
+			vertical-align: middle;
+			border: 1px solid black;
+		}
+		th {
+			padding: 10px;
+			text-align: center;
+			background-color: #333;
+			color: white;
+		}
+	</style>
+</head>
+<body>
+	<div id="calendar">
+		<h1 id="month-year"></h1>
+		<table>
+			<thead>
+				<tr>
+					<th>周日</th>
+					<th>周一</th>
+					<th>周二</th>
+					<th>周三</th>
+					<th>周四</th>
+					<th>周五</th>
+					<th>周六</th>
+				</tr>
+			</thead>
+			<tbody id="calendar-body">
+			</tbody>
+		</table>
+	</div>
+
+	<script>
+		// 获取今天的日期
+		var today = new Date();
+		var currentMonth = today.getMonth();
+		var currentYear = today.getFullYear();
+
+		// 将当前月份和年份显示在标题中
+		var monthYear = document.getElementById("month-year");
+		monthYear.innerHTML = currentYear + "年" + (currentMonth + 1) + "月";
+
+		// 创建日历表格
+		var calendarBody = document.getElementById("calendar-body");
+		createCalendar(currentMonth, currentYear);
+
+		// 创建日历函数
+		function createCalendar(month, year) {
+			// 清空表格中的内容
+			calendarBody.innerHTML = "";
+
+			// 获取指定月份的第一天和最后一天
+			var firstDay = new Date(year, month, 1);
+			var lastDay = new Date(year, month + 1, 0);
+
+			// 计算本月第一天之前的空白格子数
+			var startingDay = firstDay.getDay();
+
+			// 创建表格中的每个单元格
+			var date = 1;
+			for (var i = 0; i < 6; i++) {
+				// 创建一行
+				var row = document.createElement("tr");
+
+				// 创建一行中的每个单元格
+				for (var j = 0; j < 7; j++) {
+					if (i === 0 && j < startingDay) {
+						// 创建空白格子
+						var cell = document.createElement("td");
+						row.appendChild(cell);
+					} else if (date > lastDay.getDate()) {
+						// 如果日期超出了本月最后一天，就停止创建单元格
+						break;
+					} else {
+						// 创建日期单元格
+						var cell = document.createElement("td");
+						cell.innerHTML = date;
+						if (date === today.getDate() && year === today.getFullYear() && month === today.getMonth()) {
+							// 如果单元格的日期是今天，就
