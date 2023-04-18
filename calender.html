@@ -1,92 +1,99 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>2023年日历</title>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<style>
-		table {
-			border-collapse: collapse;
-			margin: auto;
-		}
-		td {
-			width: 100px;
-			height: 100px;
-			text-align: center;
-			vertical-align: middle;
-			border: 1px solid black;
-		}
-		th {
-			padding: 10px;
-			text-align: center;
-			background-color: #333;
-			color: white;
-		}
-	</style>
+  <meta charset="UTF-8">
+  <title>2023年日历</title>
+  <style>
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    th, td {
+      text-align: center;
+      padding: 10px;
+      border: 1px solid #ddd;
+    }
+
+    th {
+      background-color: #eee;
+    }
+
+    td.today {
+      background-color: #ccc;
+    }
+  </style>
 </head>
 <body>
-	<div id="calendar">
-		<h1 id="month-year"></h1>
-		<table>
-			<thead>
-				<tr>
-					<th>周日</th>
-					<th>周一</th>
-					<th>周二</th>
-					<th>周三</th>
-					<th>周四</th>
-					<th>周五</th>
-					<th>周六</th>
-				</tr>
-			</thead>
-			<tbody id="calendar-body">
-			</tbody>
-		</table>
-	</div>
+  <h1>2023年日历</h1>
+  <div>
+    <label for="month">选择月份：</label>
+    <select id="month" onchange="changeMonth()">
+      <option value="0">一月</option>
+      <option value="1">二月</option>
+      <option value="2">三月</option>
+      <option value="3">四月</option>
+      <option value="4">五月</option>
+      <option value="5">六月</option>
+      <option value="6">七月</option>
+      <option value="7">八月</option>
+      <option value="8">九月</option>
+      <option value="9">十月</option>
+      <option value="10">十一月</option>
+      <option value="11">十二月</option>
+    </select>
+  </div>
+  <table id="calendar">
+    <thead>
+      <tr>
+        <th>星期日</th>
+        <th>星期一</th>
+        <th>星期二</th>
+        <th>星期三</th>
+        <th>星期四</th>
+        <th>星期五</th>
+        <th>星期六</th>
+      </tr>
+    </thead>
+    <tbody id="calendar-body">
+    </tbody>
+  </table>
+  <script>
+    function getDaysInMonth(month, year) {
+      return new Date(year, month + 1, 0).getDate();
+    }
 
-	<script>
-		// 获取今天的日期
-		var today = new Date();
-		var currentMonth = today.getMonth();
-		var currentYear = today.getFullYear();
+    function createCalendar(month, year) {
+      var firstDay = new Date(year, month, 1);
+      var daysInMonth = getDaysInMonth(month, year);
+      var weekdayOfFirstDay = firstDay.getDay();
+      var calendarBody = document.getElementById("calendar-body");
+      calendarBody.innerHTML = "";
+      var date = 1;
+      for (var i = 0; i < 6; i++) {
+        var row = document.createElement("tr");
+        for (var j = 0; j < 7; j++) {
+          if (i === 0 && j < weekdayOfFirstDay) {
+            var cell = document.createElement("td");
+            cell.innerHTML = "";
+            row.appendChild(cell);
+          } else if (date > daysInMonth) {
+            break;
+          } else {
+            var cell = document.createElement("td");
+            cell.innerHTML = date;
+            if (new Date(year, month, date).toDateString() === new Date().toDateString()) {
+              cell.classList.add("today");
+            }
+            row.appendChild(cell);
+            date++;
+          }
+        }
+        calendarBody.appendChild(row);
+      }
+    }
 
-		// 将当前月份和年份显示在标题中
-		var monthYear = document.getElementById("month-year");
-		monthYear.innerHTML = currentYear + "年" + (currentMonth + 1) + "月";
-
-		// 创建日历表格
-		var calendarBody = document.getElementById("calendar-body");
-		createCalendar(currentMonth, currentYear);
-
-		// 创建日历函数
-		function createCalendar(month, year) {
-			// 清空表格中的内容
-			calendarBody.innerHTML = "";
-
-			// 获取指定月份的第一天和最后一天
-			var firstDay = new Date(year, month, 1);
-			var lastDay = new Date(year, month + 1, 0);
-
-			// 计算本月第一天之前的空白格子数
-			var startingDay = firstDay.getDay();
-
-			// 创建表格中的每个单元格
-			var date = 1;
-			for (var i = 0; i < 6; i++) {
-				// 创建一行
-				var row = document.createElement("tr");
-
-				// 创建一行中的每个单元格
-				for (var j = 0; j < 7; j++) {
-					if (i === 0 && j < startingDay) {
-						// 创建空白格子
-						var cell = document.createElement("td");
-						row.appendChild(cell);
-					} else if (date > lastDay.getDate()) {
-						// 如果日期超出了本月最后一天，就停止创建单元格
-						break;
-					} else {
-						// 创建日期单元格
-						var cell = document.createElement("td");
-						cell.innerHTML = date;
-						if (date === today.getDate() && year === today.getFullYear()
+    function changeMonth() {
+      var month = document.getElementById("month").value;
+      var year = 2023;
+     
