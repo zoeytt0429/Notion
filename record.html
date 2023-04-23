@@ -59,6 +59,10 @@
 .notion-widget td .status.missed {
   background-color: #f44336;
 }
+
+.notion-widget td.selected {
+  background-color: #e3e3e3;
+}
 </style>
 
 <div class="notion-widget">
@@ -78,17 +82,6 @@
       </tr>
     </thead>
     <tbody>
-      <!-- Replace the dates in this section with the dates for the current month -->
-      <tr>
-        <td><span class="date"></span></td>
-        <td><span class="date"></span></td>
-        <td><span class="date"></span></td>
-        <td><span class="date"></span></td>
-        <td><span class="date"></span></td>
-        <td><span class="date"></span></td>
-        <td><span class="date"></span></td>
-      </tr>
-      <!-- End of date section -->
     </tbody>
   </table>
 </div>
@@ -102,15 +95,28 @@
     partial: '#ffc107',
     missed: '#f44336'
   };
-  
+
   // Get the current year and month
   var now = new Date();
   var year = now.getFullYear();
   var month = now.getMonth() + 1;
-  
+
   // Get the first day and last day of the current month
   var firstDay = new Date(year, month - 1, 1);
   var lastDay = new Date(year, month, 0);
-  
+
   // Calculate the number of days in the current month
-  var num
+  var numDays = lastDay.getDate();
+
+  // Get the table body element
+  var tableBody = document.querySelector('.notion-widget table tbody');
+
+  // Add rows to the table for each week
+  var row = null;
+  var date = 1;
+  for (var i = 0; i < 6; i++) {
+    row = document.createElement('tr');
+    for (var j = 0; j < 7; j++) {
+      var cell = document.createElement('td');
+      if (i === 0 && j < firstDay.getDay()) {
+        // Add empty
