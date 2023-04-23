@@ -95,6 +95,14 @@
 
 <script>
 (function() {
+  // Define the statuses and their corresponding colors
+  var statuses = {
+    empty: '#ddd',
+    filled: '#4caf50',
+    partial: '#ffc107',
+    missed: '#f44336'
+  };
+  
   // Get the current year and month
   var now = new Date();
   var year = now.getFullYear();
@@ -105,10 +113,4 @@
   var lastDay = new Date(year, month, 0);
   
   // Calculate the number of days in the current month
-  var numDays = lastDay.getDate();
-  
-  // Get the table cells for the dates
-  var cells = document.querySelectorAll('.notion-widget tbody td');
-  
-  // Set the text and data attributes for each cell
-  for (var i = 0; i < cells.length; i
+  var num
