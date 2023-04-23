@@ -1,3 +1,66 @@
+<style>
+.notion-widget {
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #333;
+}
+
+.notion-widget table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.notion-widget th,
+.notion-widget td {
+  text-align: center;
+  padding: 10px;
+}
+
+.notion-widget th {
+  font-weight: bold;
+  background-color: #eee;
+}
+
+.notion-widget td {
+  position: relative;
+}
+
+.notion-widget td .date {
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.notion-widget td .status {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 5px;
+  font-size: 12px;
+  font-weight: bold;
+  color: #fff;
+}
+
+.notion-widget td .status.empty {
+  background-color: #ddd;
+}
+
+.notion-widget td .status.filled {
+  background-color: #4caf50;
+}
+
+.notion-widget td .status.partial {
+  background-color: #ffc107;
+}
+
+.notion-widget td .status.missed {
+  background-color: #f44336;
+}
+</style>
+
 <div class="notion-widget">
   <table>
     <thead>
@@ -15,51 +78,37 @@
       </tr>
     </thead>
     <tbody>
+      <!-- Replace the dates in this section with the dates for the current month -->
       <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td>1</td>
-        <td>2</td>
-        <td>3</td>
+        <td><span class="date"></span></td>
+        <td><span class="date"></span></td>
+        <td><span class="date"></span></td>
+        <td><span class="date"></span></td>
+        <td><span class="date"></span></td>
+        <td><span class="date"></span></td>
+        <td><span class="date"></span></td>
       </tr>
-      <tr>
-        <td>4</td>
-        <td>5</td>
-        <td>6</td>
-        <td>7</td>
-        <td>8</td>
-        <td>9</td>
-        <td>10</td>
-      </tr>
-      <tr>
-        <td>11</td>
-        <td>12</td>
-        <td>13</td>
-        <td>14</td>
-        <td>15</td>
-        <td>16</td>
-        <td>17</td>
-      </tr>
-      <tr>
-        <td>18</td>
-        <td>19</td>
-        <td>20</td>
-        <td>21</td>
-        <td>22</td>
-        <td>23</td>
-        <td>24</td>
-      </tr>
-      <tr>
-        <td>25</td>
-        <td>26</td>
-        <td>27</td>
-        <td>28</td>
-        <td>29</td>
-        <td>30</td>
-        <td></td>
-      </tr>
+      <!-- End of date section -->
     </tbody>
   </table>
 </div>
+
+<script>
+(function() {
+  // Get the current year and month
+  var now = new Date();
+  var year = now.getFullYear();
+  var month = now.getMonth() + 1;
+  
+  // Get the first day and last day of the current month
+  var firstDay = new Date(year, month - 1, 1);
+  var lastDay = new Date(year, month, 0);
+  
+  // Calculate the number of days in the current month
+  var numDays = lastDay.getDate();
+  
+  // Get the table cells for the dates
+  var cells = document.querySelectorAll('.notion-widget tbody td');
+  
+  // Set the text and data attributes for each cell
+  for (var i = 0; i < cells.length; i
